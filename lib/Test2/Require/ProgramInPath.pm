@@ -30,13 +30,13 @@ the reason why the test was skipped.  Currently `This test only runs if $program
 
 =cut
 
-    use File::Which qw( which );
+    use File::Which ();
     use Carp qw( confess );
     use parent qw( Test2::Require );
 
     sub skip ( $, $program = undef ) {
         confess "no program specified" unless defined $program;
-        return undef if which $program;
+        return undef if File::Which::which $program;
         return "This test only runs if $program is in the PATH";
     }
 }
